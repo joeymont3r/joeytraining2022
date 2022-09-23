@@ -76,7 +76,7 @@ pycurl==7.44.1
 pyls-spyder==0.4.0
 pymongo==4.1.1
 
-pyodbc===4.0.0-unsupported
+
 
 pyreadline==2.1
 
