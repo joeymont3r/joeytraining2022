@@ -104,7 +104,7 @@ Sphinx==4.2.0
 
 
 
-tables==3.6.1
+
 TBB==0.2
 
 terminado==0.9.4
