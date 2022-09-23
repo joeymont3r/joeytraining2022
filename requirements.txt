@@ -98,7 +98,7 @@ scikit-image==0.18.3
 
 simplegeneric==0.8.1
 
-sip==4.19.13
+
 
 Sphinx==4.2.0
 
