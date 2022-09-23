@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainingstagebuch</title>
+    <link href = "/static/styles/stylesheet.css" rel = "stylesheet" type = "text/css">
+    
+    <script src = "C:\Users\User\Documents\Studium\2. Semester\ASOTE\Labor 1\.ipynb_checkpoints\Trainingstagebuch\templates\Trainingsapp\mongo-db.js\require.js"></script>
+    <script src = "C:\Users\User\Documents\Studium\2. Semester\ASOTE\Labor 1\.ipynb_checkpoints\Trainingstagebuch\templates\Trainingsapp\mongo-db.js\index.js"></script>
+    <script>
+        let liste = new Array;
+        
+        function listeErstellen(id){
+            if (!liste.includes(id)){
+                button = document.getElementById(id).value;
+                farbe = document.getElementById(id);
+                liste.push(button);
+                
+                farbe.style.backgroundColor = 'purple';
+                farbe.style.color = 'white';
+            } else{
+                button = document.getElementById(id).value;
+                farbe = document.getElementById(id);
+                liste2 = new Array;
+                liste.forEach((wert) => {
+                    if (wert != button){
+                        liste2.push(wert);
+                    }
+                }) 
+                
+                
+                liste = liste2
+                
+                
+                farbe.style.backgroundColor = 'white';
+                farbe.style.color = 'black';              
+                
+
+            } ausgewählt.innerHTML = liste;
+            
+        }
+
+        let zahl = 0;
+        function nummer(id){
+            zahl += 1;
+            nummer.innerHTML = zahl;
+        }
+        function getListe(){
+            return liste
+        }
+
+        function loeschen(){
+            deleteUebung(liste)
+        }
+
+    
+
+    </script>
+    
+    
+</head>
+<body class = "background-dark">
+    <div class = "background-grey">
+         <a href = "/" ><img src="/static/Bilder\bizeps.png.png" height="100px" width="100px" ></a>
+         <img  class = "imgright" src="/static/Bilder\logo2.png"  width = "120px">
+         <p class = "center text2">Get Fit or Stay Lauch!</p>       
+         
+     </div>
+   
+   
+    <div class= "center margin-top text2">
+        <h1> Trainingstagebuch</h1>
+    </div>
+    <div class= "center margin-top text2">
+    <Form>
+        {% if delete %}
+            
+            <h2>Die Übung(en) ( {{liste}} ) wurde(n) gelöscht!</h2>
+
+        {% endif %}
+    </Form>
+    </div>
+    <div class = "center draggable margin-top text2">
+        <Form>
+            <ul>
+                {% for q in training %}
+                    <th style = "border-radius : 5px; border: 2px dotted white; background-color: rgb(101, 93, 93);" id ="test1">
+                        <input type ="button" value = "{{q}}" id = "{{q}}" onclick= "listeErstellen(id); nummer(id)"; >
+                    </th>
+                    <td style = "border-radius: 10px; background-color: purple; color: white;" id = "nummer"></td>
+                {% endfor %}
+            </ul>
+        </Form>
+    </div>
+    <div class = "center draggable margin-top text2">
+        <ol id = "ausgewählt"> </ol>
+       
+    </div>
+    <div class = "center margin-top textlila">
+        <th><a href = "javascript:location.reload()"> <button style = "border-radius : 5px; background-color: rgb(147, 8, 8);"> Auswahl Löschen</button></a></th>
+        <td>
+            <form action = 'erstellt', method = 'POST'>
+                <button style = "border-radius : 5px; background-color: rgb(4, 90, 4);"  onclick = "value = getListe() ;return confirm('Trainingsplan wirklich erstellen?')" name = 'liste' required>Trainingsplan Erstellen</button>
+            </form>
+        </td>
+    </div>
+
+
+
+    <div class = "center margin-top textlila">
+        
+        <a href = "neueuebung"  style="color: purple">Ich möchte eine neue Übung anlegen </a>
+    </div>
+
+    <div class = "center margin-top textlila">
+        
+        <form action = "löschen", method = 'POST'>
+            <button style = " border-radius : 5px; background-color: rgb(147, 8, 8);" onclick = "value = getListe() ;return confirm('Soll(en) die Übung(en) wirklich gelöscht werden?')" name = 'del' >Übung Löschen</button></form>
+    </div>
+   
+    </div>
+</body>
+</html>

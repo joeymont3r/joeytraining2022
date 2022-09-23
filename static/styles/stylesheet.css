@@ -1,0 +1,50 @@
+
+        .background-grey{
+            background-color:rgb(101, 93, 93);
+        }
+        .background-purple{
+            background-color: purple;
+        }
+        .background-dark {
+            background-color: black;
+        }
+        .center{
+            display: flex;
+            justify-content: center;
+        }
+        .margin-.top{
+            margin-top: 100px;
+        }
+        .margin-.bottom{
+            margin-bottom: 400px;
+        }
+        margin-.left{
+            margin-left: 50px;
+        }
+        margin-.right{
+            margin-right: 50px
+        }
+        .text{
+            font-size: 100px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+        .text2{
+            font: size 50px;
+            color:white;
+            font-family: 'Roboto', sans-serif;
+        }
+        .textlila{
+            font : size 50px;
+            color: purple;
+            font-family: 'Roboto', sans-serif;
+        }
+        .imgright{
+            float: right;
+        }
+        .imgleft{
+            float:left;
+        }
+        .imgcenter{
+            float:center;
+        }
