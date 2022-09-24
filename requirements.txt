@@ -32,7 +32,7 @@ python-ntlm-fixed == 1.0
 python-plugin-sdk == 6.0.1
 
 requests == 2.26.0
-selector-standardization-beam 
+
 
 setuptools
 toml
