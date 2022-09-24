@@ -33,7 +33,7 @@ python-plugin-sdk == 6.0.1
 
 requests == 2.26.0
 selector-standardization-beam 
-selector-standardizers == 0.8.3
+selector-standardizers 
 setuptools == 58.0.4
 toml == 0.10.2
 tornado == 6.1
