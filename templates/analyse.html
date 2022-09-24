@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainingstagebuch | Leistungsentwicklung </title>
+    <link rel="manifest" href = "manifest.json">
+    <link href = "/static/styles/stylesheet.css" rel = "stylesheet" type = "text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+    <script>
+        function stringUmwandeln(str){
+
+            str = str.slice(1,-1);
+            str = str.split('');
+            let saetze = '';
+            let satzListe = [];
+            let datum = '';
+            let wiederholung = ''
+            let wiederholungListe = [];
+            let runde = 'sätze';
+            let daten = [];
+            let gesamt = [];
+
+            let wert = ''; 
+
+            str.forEach((zeichen)=>{
+                if (runde == 'sätze'){
+                    if ((zeichen!= '[') && (zeichen != "'") &&  (zeichen != ']')){
+                        // console.log(wert);
+                        saetze = saetze + zeichen;
+                        
+                    };
+                    if (zeichen == ']'){
+                        
+                        saetze = saetze + ',';
+                        runde = 'datum';
+                        //wert = ""; // bis hier hin i.O. liefert als saetz = 'Satz 1, Satz 2, Satz 3'
+                        
+                    }   
+                } else if (runde == 'datum'){
+                    if ((zeichen!= '[') && (zeichen != "'") &&  (zeichen != ']') && (zeichen != ',')){
+                        // console.log(wert);
+                        datum = datum + zeichen;
+                    
+                        
+                    };
+                    if (zeichen == ']'){
+                        
+                        
+                        runde = 'wiederholungen'
+                        
+
+                        
+                    } 
+                } else {
+                    if ((zeichen!= '[') && (zeichen != "'") &&  (zeichen != ']') && (zeichen != ',')){
+                        
+                        wiederholung = wiederholung + zeichen;
+                    };
+                    if (zeichen == ']'){
+                        wiederholung = wiederholung + '/';
+
+                    }
+
+
+                };
+                
+                
+                });
+
+            saetze = saetze.split(',');
+            saetze.forEach((wert)=>{
+                if (wert != ''){
+                    satzListe.push(wert);
+                }
+            })
+
+            datum = datum.split(' ');
+            datum.forEach((wert)=>{
+                if (wert != ''){
+                    daten.push(wert);
+                }
+            })
+
+            wiederholung = wiederholung.split('/')
+            wiederholung.forEach((wert)=>{
+                if (wert != ''){
+                    satz = wert.split(' ');
+                wiederholungListe.push(wert);
+                }
+                
+            })
+
+            wiederholungListe.forEach((wert, index)=>{
+                eintrag = [];
+                wert = wert.split(' ');
+                wert.forEach((bit)=>{
+                    if (bit != ''){
+                    eintrag.push(parseInt(bit));
+                }
+                wiederholungListe[index] = eintrag;
+                })
+                
+
+                //console.log(eintrag);
+
+            })
+
+            wiederholungListe.forEach((satz)=>{
+                anzahl = 0;
+                satz.forEach((werte)=>{
+                    anzahl = anzahl + werte;
+                })
+                gesamt.push(anzahl);
+
+            })
+            return [satzListe, daten, wiederholungListe, gesamt]
+            } 
+
+        function updateData(str){
+            //str = "[['Satz 1', 'Satz 2', 'Satz 3'], ['2022-09-01', '2022-09-03'], [[10, 11], [11, 14], [12, 15]]]";
+            // str = document.getElementById(id).value;
+            
+            liste = stringUmwandeln(str);
+            datasets = [];
+            satze = liste[0];
+            datum = liste[1];
+            daten = liste[2];
+            gesamt = liste[3];
+            // satze = [1,2,3]
+            // datum = [1,2,3]
+            // daten = [[2,5], [1,11],[12,13]]
+            // gesamt = [1,2,3]
+            dicGesamt = {label : 'Gesamt', data: gesamt, backgroundColor: '#800080', borderColor : '#800080'};
+            datasets.push(dicGesamt);
+
+            satze.forEach((satz, index)=>{
+            dic = {label : satz, data: daten[index], backgroundColor : '#008800', borderColor : '#008800'};
+            datasets.push(dic);
+
+            myChart.data = {
+                labels: datum,
+                datasets: datasets,
+            }
+            myChart.update();
+
+
+
+        })};
+            
+     
+            
+        
+    </script>
+    
+</head>
+<body class = "background-dark">
+    <div class = "background-grey">
+         <a href = "/" ><img src="/static/Bilder\bizeps.png.png" height="100px" width="100px" ></a>
+         <img  class = "imgright" src="/static/Bilder\logo2.png"  width = "120px">
+         <p class = "center text2">Get Fit or Stay Lauch!</p>
+         
+     </div>
+   
+   
+    <div class= "center margin-top text2">
+        <h1 style = "color : purple"> Progress? - Graphen lügen nicht!</h1>
+    </div>
+    
+    <div class= "center margin-top text2">
+    <select id = "übungAnzeigen" style = "background-color: purple; color: white; height: 38px;  text-align: center; border-radius: 10px; margin-top: 15px;" onchange = "updateData(value)">
+        <option  value = "wahl" disabled selected hidden>Wähle</option>
+        
+        {%for q in training %}
+            
+        <option value = "{{daten[q[0]]}}" id = '{{q[0]}}' >{{q[0]}}</option>
+                    
+                
+         {% endfor %}
+    </select>
+    </div>
+  
+    <div class= "center margin-top text2">
+    <canvas id = "chart" ></canvas>
+    </div>
+    <script src = 'C:\Users\User\Documents\Studium\2. Semester\ASOTE\Labor 1\.ipynb_checkpoints\Trainingstagebuch\templates\Trainingsapp\templates\methoden.js'></script>
+    <script>
+        
+        
+        let datum = [];
+        let satze = [];
+        let daten = [];
+        let datasets = [];
+        let gesamt = [];
+        dicGesamt = {label : 'Wähle eine Übung', data: gesamt, backgroundColor: '#800080', borderColor : '#800080'};
+        datasets.push(dicGesamt);
+
+        satze.forEach((satz, index)=>{
+            dic = {label : satz, data: daten[index], backgroundColor : '#008800', borderColor : '#008800'};
+            datasets.push(dic);
+        })
+        
+        
+
+    
+        // daten.forEach((datenNeu, index)=>{
+        //     let x = datum[index];
+        //     let y = datenNeu
+        // })
+        
+        let chart = document.getElementById('chart').getContext('2d');
+        chart.canvas.width = 50;
+        chart.canvas.height = 40;
+
+        let myChart = new Chart(chart,{
+            type : 'line', //bar, pie, radar, polarArea
+            data : {
+
+                labels: datum,
+                datasets: datasets,
+            
+                // datasets:[
+               
+                // {
+                //     label: 'Satz 1',
+                //     data : [1, 5, 3],
+                //     backgroundColor: '#008800',
+                //     borderColor: '#008800'
+                // },{
+                //     label: 'Satz 2',
+                //     data : [1,6,3],
+                //     backgroundColor: '#008800',
+                //     borderColor: '#008800'
+                // },{
+                // },{
+                //     label: 'Satz 3',
+                //     data : [1,4,5],
+                //     backgroundColor: '#008800',
+                //     borderColor: '#008800'
+
+                // }
+                //]
+            },
+            options: {
+            }
+        });
+
+    </script>
+ 
+  
+
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainingstagebuch</title>
+    <link href = "/static/styles/stylesheet.css" rel = "stylesheet" type = "text/css">
+</head>
+<body class = "background-dark">
+    <div class = "background-grey">
+         <a href = "/" ><img src="/static/Bilder\bizeps.png.png" height="100px" width="100px" ></a>
+         <img  class = "imgright" src="/static/Bilder\logo2.png"  width = "120px">
+         <p class = "center text2">Get Fit or Stay Lauch!</p>
+         
+     </div>
+   
+   
+    <div class= "center margin-top text2">
+        <h1> Trainingstagebuch</h1>
+    </div>
+    <div class = "center margin-top text2">
+        <ul>
+            {% for q in training %}
+                <li> <input type = "checkbox"> {{q}} </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+
+    <div class = "center margin-top textlila">
+        
+        <a href = "neueuebung"  style="color: purple">Ich möchte eine neue Übung anlegen </a>
+    </div>
+   
+    </div>
+</body>
+</html>
