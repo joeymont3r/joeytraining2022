@@ -31,9 +31,9 @@ python-ntlm == 1.1.0
 python-ntlm-fixed == 1.0
 python-plugin-sdk == 6.0.1
 wxpython==4.1.1
-requests == 2.26.0
+requests
 
-gtk-config
+
 setuptools == 58.0.4
 toml == 0.10.2
 tornado == 6.1
