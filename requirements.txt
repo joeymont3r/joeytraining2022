@@ -12,7 +12,7 @@ genshi == 0.7.7
 html5lib == 1.1
 htmlparser == 0.0.2
 httpsproxy-urllib2 == 1.0
-
+ignition-api == 8.1.20.post5
 import-java == 0.6
 importlib_metadata == 4.8.1
 jpype1 == 1.4.0
@@ -30,12 +30,12 @@ pymongo == 4.1.1
 python-ntlm == 1.1.0
 python-ntlm-fixed == 1.0
 python-plugin-sdk == 6.0.1
-
+pywin32 == 228
 requests == 2.26.0
-
-
-setuptools
-toml
-tornado
-vampireapi
-zipp
+selector-standardization-beam
+selector-standardizers
+setuptools == 58.0.4
+toml == 0.10.2
+tornado == 6.1
+vampireapi == 0.3.1
+zipp == 3.6.0
