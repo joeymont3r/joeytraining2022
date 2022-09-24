@@ -35,7 +35,7 @@ requests == 2.26.0
 selector-standardization-beam 
 selector-standardizers 
 setuptools
-toml == 0.10.2
-tornado == 6.1
-vampireapi == 0.3.1
-zipp == 3.6.0
+toml
+tornado
+vampireapi
+zipp
